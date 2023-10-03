@@ -1,0 +1,81 @@
+
+
+
+
+#' proj_Points
+#'
+#' @description Generating projective points from the persistence diagram in the diagonal, a vertical line and an horizontal line
+#' @param PD Persistence diagram with 4 columns:  time, dimension, Birth, Death.
+#' @param v vertical threshold
+#' @param h horizontal threshold
+#' @return Points of the PD projected
+proj_Points <- function(PD, v = 0, h = 0)
+{
+  n <- nrow(PD)
+  projPoints <- NULL
+
+  #### points on the horizontal boundary
+  if(h > 0)
+  {
+    for(i in 1:n)
+    {
+      if((PD[i,3] < h) & (PD[i,4] > h))
+        {projPoints <- rbind(projPoints, c(PD[i,1:3], h))} #create
+    }
+  }
+
+  #### points on the vertical boundary
+  if(v > 0)
+  {
+    for(i in 1:n)
+    {
+      if((PD[i,3] < v) & (PD[i,4] > v))
+      {projPoints <- rbind(projPoints, c(PD[i,1:2], v, PD[i,4]))}
+    }
+  }
+
+  #### points on the diagonal
+  for(i in 1:n)
+  {
+    m <- mean(unlist(PD[i,3:4]))
+    projPoints <- rbind(projPoints, c(PD[i,1:2], m, m))
+  }
+
+  colnames(projPoints) <- c("time", "dimension", "Birth", "Death")
+  return(projPoints)
+}
+
+
+
+#' remove_noisy_points
+#'
+#' @description Removing points from the persistence diagram out of the vertical and horizontal boundaries
+#' @param PD Persistence diagram with 4 columns:  time, dimension, Birth, Death.
+#' @param v vertical threshold
+#' @param h horizontal threshold
+#' @return The PD filtrated by the 2 boundaries
+remove_noisy_points <- function(PD, v = 0, h = 0)
+{
+  n <- nrow(PD)
+
+  #### points on the horizontal boundary
+  if(h > 0)
+  {
+    for(i in 1:n)
+    {
+      if(PD[i,4] <= h){PD[i,1] <- -1} #remove
+    }
+  }
+  #### points on the vertical boundary
+  if(v > 0)
+  {
+    for(i in 1:n)
+    {
+      if(PD[i,3] >= v){PD[i,1] <- -1}
+    }
+  }
+
+  PD <- PD[PD$time >= 0,]
+  return(PD)
+}
+

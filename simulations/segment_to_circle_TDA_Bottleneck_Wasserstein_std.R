@@ -31,7 +31,7 @@ plot_ly(resScale,
 
 
 ################################################
-######## persitence diamgram dynamics
+######## persistence diagram dynamics
 ################################################
 nb <- n/level
 maxDistance <- (log(nb) -digamma(1))/nb
@@ -73,7 +73,7 @@ sum(th_test[1:(level/2)])
 sum(th_test[(level/2 + 1):level])
 
 ################################################
-######## plot the data
+######## plot the data slice be slice
 ################################################
 
 par(mfrow = c(5, 4))
