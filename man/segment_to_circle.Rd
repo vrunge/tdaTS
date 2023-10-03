@@ -7,19 +7,19 @@
 segment_to_circle(nb = 1000, change = 0.5, sampling = "unif", level = 20)
 }
 \arguments{
-\item{nb}{Overall number of points}
+\item{nb}{Overall number of points to draw}
 
-\item{change}{The relative location of the change (0.5 = at the middle of the data)}
+\item{change}{The relative location of the change (example: 0.5 = at the middle of the data)}
 
-\item{sampling}{unif or regular}
+\item{sampling}{unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)}
 
-\item{level}{number of time steps}
+\item{level}{number of time steps (for option sampling = "discrete")}
 }
 \value{
 A data frame with 3 columns and nb rows
 }
 \description{
-Generating a data frame with 3 columns (x,y,t)
+Function generating a data frame with 3 columns (x,y,t) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
 }
 \examples{
 segment_to_circle()

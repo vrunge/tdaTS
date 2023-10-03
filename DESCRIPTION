@@ -6,7 +6,7 @@ Authors@R: c(
 	person("Vincent", "Runge", email = "vincent.runge@univ-evry.fr", role = c("aut", "cre")),
 	person("Tengyao", "Wang", role = c("ctb")))
 Maintainer: Vincent Runge <vincent.runge@univ-evry.fr>
-Description: Functions evaluating the Persistent diagram approach for detecting change in the topological structure of time series.
+Description: Detecting change in the topological structure of time series. We explore methods based on the comparison of persistent diagrams.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

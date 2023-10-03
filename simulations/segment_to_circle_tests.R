@@ -27,7 +27,7 @@ plot_ly(resScale,
 ######## on regular time scale
 ################################################
 
-res <- segment_to_circle(nb = my_nb, change = 0.5, sampling = "regular", level = 20)
+res <- segment_to_circle(nb = my_nb, change = 0.5, sampling = "discrete", level = 20)
 resScale <- rbind(res,c(0,-pi,pi),c(0,pi,pi),
                   c(0, pi,-pi),c(0,-pi,-pi)) ### add 4 points in the corners for scaling x and y axes
 

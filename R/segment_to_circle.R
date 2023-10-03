@@ -2,11 +2,11 @@
 
 #' segment_to_circle
 #'
-#' @description Generating a data frame with 3 columns (x,y,t)
-#' @param nb Overall number of points
-#' @param change The relative location of the change (0.5 = at the middle of the data)
-#' @param sampling unif or regular
-#' @param level number of time steps
+#' @description Function generating a data frame with 3 columns (x,y,t) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
+#' @param nb Overall number of points to draw
+#' @param change The relative location of the change (example: 0.5 = at the middle of the data)
+#' @param sampling unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)
+#' @param level number of time steps (for option sampling = "discrete")
 #' @return A data frame with 3 columns and nb rows
 #' @examples
 #' segment_to_circle()
@@ -46,7 +46,7 @@ segment_to_circle <- function(nb = 1000,
     times <- runif(nb)
     l <- lapply(times, generator, change = change)
   }
-  if(sampling == "regular")
+  if(sampling == "discrete")
   {
     times <- rep((0:(level-1))/level, each = nb/level)
     l <- lapply(times, generator, change = change)
