@@ -1,39 +1,6 @@
 
 
 
-#' Generate_All_Persistence_diagrams
-#'
-#' @description
-#' @param data
-#' @param nbLevel
-#' @return Points of the PD projected
-Generate_All_Persistence_diagrams <- function(data, nbLevel = 20)
-{
-  n <- 400
-  All_PD <- NULL
-  for(k in 0:(level-1))
-  {
-    tau <- n*k/level
-    tau2 <- n*(k+1)/level
-    res_slice <- data[(tau+1):tau2,]
-    X <- res_slice[,-1]
-    DiagAlphaCmplx <- alphaComplexDiag(
-      X = X,
-      library = c("GUDHI", "Dionysus"),
-      location = TRUE,
-      printProgress = TRUE)
-
-    diagramAndNB <- cbind(k, DiagAlphaCmplx$diagram)
-    All_PD <- rbind(All_PD, diagramAndNB)
-  }
-  colnames(All_PD)[1] <- "time"
-  All_PD <- as.data.frame(All_PD)
-
-  return(ALL_PD)
-}
-
-
-
 #' proj_Points
 #'
 #' @description Generating projective points from the persistence diagram in the diagonal, a vertical line and an horizontal line
@@ -88,6 +55,7 @@ proj_Points <- function(PD, v = 0, h = 0)
 #' @param PD Persistence diagram with 4 columns:  time, dimension, Birth, Death.
 #' @param v vertical threshold
 #' @param h horizontal threshold
+#' @param infinity if FALSE we remove points with infinite "Death" value
 #' @return The PD filtrated by the 2 boundaries
 remove_noisy_points <- function(PD, v = 0, h = 0, infinity = FALSE)
 {

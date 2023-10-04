@@ -48,13 +48,14 @@ segment_to_circle <- function(n = 1000,
   }
   if(time_sampling == "discrete")
   {
-    times <- rep((0:(nb_levels-1))/nb_levels, each = n/nb_levels)
+    v <- 0:(n-1) %/% (n/nb_levels)
+    times <- v/(nb_levels)
     l <- lapply(times, generator, change = change)
   }
 
   res <- matrix(unlist(l), nrow = length(l), byrow = TRUE) %>%
     as_tibble(.name_repair = "minimal") %>%
-    setNames(c("time","x","y"))
+    setNames(c("t","x","y"))
 
   return(res)
 }

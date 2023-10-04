@@ -12,6 +12,8 @@ remove_noisy_points(PD, v = 0, h = 0, infinity = FALSE)
 \item{v}{vertical threshold}
 
 \item{h}{horizontal threshold}
+
+\item{infinity}{if FALSE we remove points with infinite "Death" value}
 }
 \value{
 The PD filtrated by the 2 boundaries
