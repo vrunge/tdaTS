@@ -1,6 +1,5 @@
 
 
-
 #' proj_Points
 #'
 #' @description Generating projective points from the persistence diagram in the diagonal, a vertical line and an horizontal line
@@ -56,36 +55,11 @@ proj_Points <- function(PD, v = 0, h = 0)
 #' @param v vertical threshold
 #' @param h horizontal threshold
 #' @param infinity if FALSE we remove points with infinite "Death" value
-#' @return The PD filtrated by the 2 boundaries
-remove_noisy_points <- function(PD, v = 0, h = 0, infinity = FALSE)
+#' @return The PD filtrated by the 2 boundaries (and the Inf points)
+remove_noisy_points <- function(PD, birth = Inf, death = 0, infinity = FALSE)
 {
-  n <- nrow(PD)
-
-  #### points on the horizontal boundary
-  if(h > 0)
-  {
-    for(i in 1:n)
-    {
-      if(PD[i,4] <= h){PD[i,1] <- -1} #remove
-    }
-  }
-  #### points on the vertical boundary
-  if(v > 0)
-  {
-    for(i in 1:n)
-    {
-      if(PD[i,3] >= v){PD[i,1] <- -1}
-    }
-  }
-  if(infinity == FALSE)
-  {
-    for(i in 1:n)
-    {
-      if(PD[i,4] == Inf){PD[i,1] <- -1}
-    }
-  }
-
-  PD <- PD[PD$time >= 0,]
+  if(infinity == TRUE){PD <- PD %>% filter(Birth < birth & Death > death)}
+  if(infinity == FALSE){PD <- PD %>% filter(Birth < v & Death > h & Death != Inf)}
   return(PD)
 }
 

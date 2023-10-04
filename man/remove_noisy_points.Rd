@@ -4,19 +4,19 @@
 \alias{remove_noisy_points}
 \title{remove_noisy_points}
 \usage{
-remove_noisy_points(PD, v = 0, h = 0, infinity = FALSE)
+remove_noisy_points(PD, birth = Inf, death = 0, infinity = FALSE)
 }
 \arguments{
 \item{PD}{Persistence diagram with 4 columns:  time, dimension, Birth, Death.}
 
+\item{infinity}{if FALSE we remove points with infinite "Death" value}
+
 \item{v}{vertical threshold}
 
 \item{h}{horizontal threshold}
-
-\item{infinity}{if FALSE we remove points with infinite "Death" value}
 }
 \value{
-The PD filtrated by the 2 boundaries
+The PD filtrated by the 2 boundaries (and the Inf points)
 }
 \description{
 Removing points from the persistence diagram out of the vertical and horizontal boundaries
