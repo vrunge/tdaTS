@@ -1,6 +1,38 @@
 
 
 
+#' Generate_All_Persistence_diagrams
+#'
+#' @description
+#' @param data
+#' @param nbLevel
+#' @return Points of the PD projected
+Generate_All_Persistence_diagrams <- function(data, nbLevel = 20)
+{
+  n <- 400
+  All_PD <- NULL
+  for(k in 0:(level-1))
+  {
+    tau <- n*k/level
+    tau2 <- n*(k+1)/level
+    res_slice <- data[(tau+1):tau2,]
+    X <- res_slice[,-1]
+    DiagAlphaCmplx <- alphaComplexDiag(
+      X = X,
+      library = c("GUDHI", "Dionysus"),
+      location = TRUE,
+      printProgress = TRUE)
+
+    diagramAndNB <- cbind(k, DiagAlphaCmplx$diagram)
+    All_PD <- rbind(All_PD, diagramAndNB)
+  }
+  colnames(All_PD)[1] <- "time"
+  All_PD <- as.data.frame(All_PD)
+
+  return(ALL_PD)
+}
+
+
 
 #' proj_Points
 #'
@@ -38,7 +70,10 @@ proj_Points <- function(PD, v = 0, h = 0)
   for(i in 1:n)
   {
     m <- mean(unlist(PD[i,3:4]))
-    projPoints <- rbind(projPoints, c(PD[i,1:2], m, m))
+    print(m)
+  print(h)
+  print(v)
+    if((m > h) & (m < v)){projPoints <- rbind(projPoints, c(PD[i,1:2], m, m))}
   }
 
   colnames(projPoints) <- c("time", "dimension", "Birth", "Death")
@@ -54,7 +89,7 @@ proj_Points <- function(PD, v = 0, h = 0)
 #' @param v vertical threshold
 #' @param h horizontal threshold
 #' @return The PD filtrated by the 2 boundaries
-remove_noisy_points <- function(PD, v = 0, h = 0)
+remove_noisy_points <- function(PD, v = 0, h = 0, infinity = FALSE)
 {
   n <- nrow(PD)
 
@@ -72,6 +107,13 @@ remove_noisy_points <- function(PD, v = 0, h = 0)
     for(i in 1:n)
     {
       if(PD[i,3] >= v){PD[i,1] <- -1}
+    }
+  }
+  if(infinity == FALSE)
+  {
+    for(i in 1:n)
+    {
+      if(PD[i,4] == Inf){PD[i,1] <- -1}
     }
   }
 

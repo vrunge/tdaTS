@@ -10,4 +10,8 @@ Description: Detecting change in the topological structure of time series. We ex
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    dplyr,
+    tibble
+Suggests: devtools, testthat, rmarkdown, ggplot2, knitr
 RoxygenNote: 7.2.3

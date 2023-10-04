@@ -2,25 +2,25 @@
 
 #' segment_to_circle
 #'
-#' @description Function generating a data frame with 3 columns (x,y,t) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
-#' @param nb Overall number of points to draw
-#' @param change The relative location of the change (example: 0.5 = at the middle of the data)
-#' @param sampling unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)
-#' @param level number of time steps (for option sampling = "discrete")
-#' @return A data frame with 3 columns and nb rows
+#' @description Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
+#' @param n Overall number of points to draw
+#' @param change Relative location of the change (example: 0.5 = at the middle of the data, time goes from 0 to 1 with this function)
+#' @param time_sampling unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)
+#' @param nb_levels number of time steps (for option sampling = "discrete")
+#' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
 #' segment_to_circle()
-segment_to_circle <- function(nb = 1000,
+segment_to_circle <- function(n = 1000,
                               change = 0.5,
-                              sampling = "unif",
-                              level = 20)
+                              time_sampling = "unif",
+                              nb_levels = 20)
 {
   #####
   ##### inner function start
   #####
   generator <- function(time, change)
   {
-    pos <- runif(1, min = -pi, max = pi)
+    pos <- runif(1, min = -pi, max = pi) #choosing uniformly a point on the segment/circle
     if(time < change)  ### in the move from segment to circle
     {
       time_scale <- time/change ### time scaling
@@ -41,21 +41,22 @@ segment_to_circle <- function(nb = 1000,
   ##### inner function end
   #####
 
-  if(sampling == "unif")
+  if(time_sampling == "unif")
   {
-    times <- runif(nb)
+    times <- sort(runif(n))
     l <- lapply(times, generator, change = change)
   }
-  if(sampling == "discrete")
+  if(time_sampling == "discrete")
   {
-    times <- rep((0:(level-1))/level, each = nb/level)
+    times <- rep((0:(nb_levels-1))/nb_levels, each = n/nb_levels)
     l <- lapply(times, generator, change = change)
   }
 
-  res <- data.frame(matrix(unlist(l), nrow = length(l), byrow = TRUE))
-  colnames(res) <- c("time","x","y")
-  res <- res[order(res$time),]
+  res <- matrix(unlist(l), nrow = length(l), byrow = TRUE) %>%
+    as_tibble(.name_repair = "minimal") %>%
+    setNames(c("time","x","y"))
 
   return(res)
 }
+
 

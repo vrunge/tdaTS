@@ -4,7 +4,7 @@
 \alias{remove_noisy_points}
 \title{remove_noisy_points}
 \usage{
-remove_noisy_points(PD, v = 0, h = 0)
+remove_noisy_points(PD, v = 0, h = 0, infinity = FALSE)
 }
 \arguments{
 \item{PD}{Persistence diagram with 4 columns:  time, dimension, Birth, Death.}

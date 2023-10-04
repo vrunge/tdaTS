@@ -4,22 +4,27 @@
 \alias{segment_to_circle}
 \title{segment_to_circle}
 \usage{
-segment_to_circle(nb = 1000, change = 0.5, sampling = "unif", level = 20)
+segment_to_circle(
+  n = 1000,
+  change = 0.5,
+  time_sampling = "unif",
+  nb_levels = 20
+)
 }
 \arguments{
-\item{nb}{Overall number of points to draw}
+\item{n}{Overall number of points to draw}
 
-\item{change}{The relative location of the change (example: 0.5 = at the middle of the data)}
+\item{change}{Relative location of the change (example: 0.5 = at the middle of the data, time goes from 0 to 1 with this function)}
 
-\item{sampling}{unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)}
+\item{time_sampling}{unif (uniform continuous time sampling) or discrete (data are located at discrete regular time steps)}
 
-\item{level}{number of time steps (for option sampling = "discrete")}
+\item{nb_levels}{number of time steps (for option sampling = "discrete")}
 }
 \value{
-A data frame with 3 columns and nb rows
+tibble with 3 columns (t,x,y) and n rows
 }
 \description{
-Function generating a data frame with 3 columns (x,y,t) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
+Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
 }
 \examples{
 segment_to_circle()
