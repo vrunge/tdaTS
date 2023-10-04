@@ -9,11 +9,11 @@ remove_noisy_points(PD, birth = Inf, death = 0, infinity = FALSE)
 \arguments{
 \item{PD}{Persistence diagram with 4 columns:  time, dimension, Birth, Death.}
 
+\item{birth}{vertical threshold}
+
+\item{death}{horizontal threshold}
+
 \item{infinity}{if FALSE we remove points with infinite "Death" value}
-
-\item{v}{vertical threshold}
-
-\item{h}{horizontal threshold}
 }
 \value{
 The PD filtrated by the 2 boundaries (and the Inf points)
