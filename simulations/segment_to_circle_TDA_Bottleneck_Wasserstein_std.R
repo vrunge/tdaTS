@@ -9,10 +9,10 @@ library(plotly)
 n <- 1000
 level <- 20 #plots ok for level = 20
 
-res <- segment_to_circle(nb = n,
+res <- segment_to_circle(n = n,
                          change = 0.5,
-                         sampling = "discrete",
-                         level = level)
+                         time_sampling = "discrete",
+                        nb_levels = level)
 
 ######## adding noise to the data
 res[,2:3] <- res[,2:3] + rnorm(2*n, sd = 0.0)
@@ -24,10 +24,10 @@ resScale <- rbind(res,c(0,-pi,pi),c(0,pi,pi),
 plot_ly(resScale,
         x=resScale$x,
         y=resScale$y,
-        z=resScale$time,
+        z=resScale$t,
         type="scatter3d",
         mode = "markers",
-        color=resScale$time)
+        color=resScale$t)
 
 
 ################################################

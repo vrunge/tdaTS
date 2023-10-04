@@ -1,40 +1,37 @@
 
 
-nb_levels <- 20
-data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = nb_levels)
-all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = nb_levels)
-
-dim(all_PD)
-
-
-
-nb_levels <- 22
-data <- segment_to_circle(n = 10000, time_sampling = "unif")
-
-all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = nb_levels)
-
-dim(all_PD)
-
-
-
-
-####
+################
+#### data
+################
 
 nb_levels <- 20
 data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = nb_levels)
+#data <- segment_to_circle(n = 1000, time_sampling = "unif")
+
+################
+#### all persistent diagrams
+################
 all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = nb_levels)
+dim(all_PD)
 
-v <- 0.4
-h <- 0.01
-res1 <- all_PD %>%
-  filter(Birth < v & Death > h & Death != Inf)
-res2 <- remove_noisy_points(all_PD, birth = v, death = h, infinity = FALSE)
 
-res1 %>% print(n = res1 %>% nrow)
-res2 %>% print(n = res2 %>% nrow)
+################
+#### verif with plots and thresholding
+################
+birth <- 0.3
+death <- 0.2
+Plot_All_Persistence_Diagrams(data, birth = birth, death = death, nb_levels = nb_levels)
 
-remove_noisy_points(all_PD, birth = v, death = h, infinity = FALSE) %>% print(n =100)
-remove_noisy_points(all_PD, birth = v, death = h, infinity = TRUE) %>% print(n =100)
+
+################
+#### thresholding
+################
+remove_noisy_points(all_PD, birth = birth, death = death, infinity = FALSE) %>% print(n =100)
+
+################
+#### distances: Wasserstein truncated
+################
+
 
 
 

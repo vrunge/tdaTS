@@ -1,7 +1,10 @@
 exportPattern("^[[:alpha:]]+")
 
 importFrom("stats", "runif")
+importFrom("stats", "rnorm")
 importFrom("stats", "setNames")
+
+importFrom("graphics", "lines", "mtext", "par", "segments")
 
 importFrom(magrittr,"%>%")
 
