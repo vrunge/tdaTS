@@ -51,7 +51,7 @@ Plot_All_Persistence_Diagrams <- function(data,
       segments(x0 = birth, y0 = birth, x1 = birth, y1 = my_max, col = 1, lwd = 1.5)
       segments(x0 = 0, y0 = death, x1 = death, y1 = death, col = 1, lwd = 1.5)
   }
-  mtext("(1) Sequence of Persistence Diagrams", side = 3, line = - 2, outer = TRUE)
+  mtext("Sequence of Persistence Diagrams", side = 3, line = - 2, outer = TRUE)
 
   par(mfrow = c(1,1))
   if (nb_levels <= u*(u+1)){par(mfrow = c(u+1, u), mar=c(0,0,0,0), mgp=c(1.5,0.5,0))}
