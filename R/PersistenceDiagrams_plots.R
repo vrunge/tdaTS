@@ -16,6 +16,7 @@ Plot_All_Persistence_Diagrams <- function(data,
                                           birth = Inf,
                                           death = 0)
 {
+  x <- y <- NULL
   opar <- par()
   n <- data %>% nrow()
 
@@ -64,6 +65,9 @@ Plot_All_Persistence_Diagrams <- function(data,
   if (nb_levels <= u*(u+1)){par(mfrow = c(u+1, u), mar=c(0,0,0,0), mgp=c(1.5,0.5,0))}
   else{par(mfrow = c(u+1, u+1), mar=c(1,2,2,0), mgp=c(1.5,0.5,0))}
 
+  xl <- c(data %>% select(x) %>% min(), data %>% select(x) %>% max())
+  yl <- c(data %>% select(y) %>% min(), data %>% select(y) %>% max())
+
   for(k in 0:(nb_levels-1))
   {
     data_slice <- data %>% filter(v == k)
@@ -73,7 +77,7 @@ Plot_All_Persistence_Diagrams <- function(data,
       library = c("GUDHI", "Dionysus"),
       location = TRUE,
       printProgress = FALSE)
-    plot(X, col = 1,xaxt="n", yaxt="n",xlab="", ylab="")
+    plot(X, col = 1,xaxt="n", yaxt="n",xlab="", ylab="", xlim = xl, ylim = yl, asp = 1)
     one <- which(DiagAlphaCmplx[["diagram"]][, 1] == 1)
     for (i in seq(along = one))
     {

@@ -5,10 +5,14 @@
 ################
 
 nb_levels <- 20
-data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = nb_levels)
+data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
+data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.2)
+data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.2)
 #data <- segment_to_circle(n = 1000, time_sampling = "unif")
+data <- circle_distortion(X_rate = 3, Y_rate = 1)
 
 ######## plot the data
+
 library(plotly)
 resScale <- rbind(data,c(0,-pi,pi),c(0,pi,pi),c(0, pi,-pi),c(0,-pi,-pi)) ### add 4 points in the corners for scaling x and y axes
 plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
@@ -20,7 +24,7 @@ plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
 ################
 all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = nb_levels)
 dim(all_PD)
-all_PD %>% print(n = 1000)
+all_PD %>% print(n = 100)
 
 ################
 #### verif with plots and thresholding
@@ -33,7 +37,7 @@ Plot_All_Persistence_Diagrams(data, birth = birth, death = death, nb_levels = nb
 ################
 #### thresholding
 ################
-#all_PD <- remove_noisy_points(all_PD, birth = birth, death = death, infinity = FALSE)
+all_PD <- remove_noisy_points(all_PD, birth = birth, death = death, infinity = FALSE)
 
 
 ################
@@ -41,7 +45,7 @@ Plot_All_Persistence_Diagrams(data, birth = birth, death = death, nb_levels = nb
 ################
 
 D_wasserstein <- distances_Persistence_Diagrams(all_PD, type = "2by2")
-
+par(mfrow = c(1,1))
 library(fields)
 D_wasserstein <- t(D_wasserstein)
 image.plot(D_wasserstein[,nrow(D_wasserstein):1], axes = F,  col = grey(seq(0,1, length = 256)))

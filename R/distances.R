@@ -24,7 +24,7 @@ distances_Persistence_Diagrams <- function(PD, distance = "wasserstein", type = 
       {
         u <- as.matrix(PD %>% filter(time == i) %>% select(-"time"))
         v <- as.matrix(PD %>% filter(time == j) %>% select(-"time"))
-        D_wasserstein[i+1,j+1] <- TDA::wasserstein(u, v, p = 2, dimension = 1)
+        D_wasserstein[i+1,j+1] <- TDA::wasserstein(u, v, p = 2, dimension = c(0,1))
       }
     }
   }
@@ -34,7 +34,7 @@ distances_Persistence_Diagrams <- function(PD, distance = "wasserstein", type = 
     {
       u <- as.matrix(PD %>% filter(time <= i) %>% select(-"time"))
       v <- as.matrix(PD %>% filter(time > i) %>% select(-"time"))
-      D_wasserstein[i+1,i+1] <- TDA::wasserstein(u, v, p = 2, dimension = 1)
+      D_wasserstein[i+1,i+1] <- TDA::wasserstein(u, v, p = 2, dimension = c(0,1))
     }
   }
 
