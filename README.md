@@ -1,8 +1,8 @@
 <a id="top"></a>
 
 # tdaTS Vignette
-### Vincent Runge
-#### LaMME, Evry University
+### Vincent Runge, Tengyao Wang
+#### Evry University (Paris-Saclay) & London School of Economics
 ### October 3, 2022
 
 > [Quick Start](#qs)
