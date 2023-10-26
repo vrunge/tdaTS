@@ -1,23 +1,18 @@
 
-
-#' segment_to_circle
+#' circle_extinction
 #'
-#' @description Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a segment closing itself continuously into a circle at the change-point location. The transformation is "isometric" as the length of the initial segment (= 2 x pi) at time t=0 is preserved at all time steps and the obtained circle has a circumference of length 2 x pi (only if no distortion with \code{X_Rate = 1} and \code{Y_Rate = 1})
+#' @description Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a circle transformed into a segment by reduction of one of the semi-axis
 #' @param n Overall number of points to draw
 #' @param change Relative location of the change (example: \code{change = 0.5} = at the middle of the data, time goes from 0 to 1 with this function)
 #' @param time_sampling \code{"unif"} (uniform continuous time sampling) or \code{"discrete"} (data are located at discrete regular time steps)
 #' @param nb_levels number of time steps (for option \code{sampling = "discrete"}). The n points are distributed uniformily (same amount by level when possible) on all the \code{nb_levels}.
-#' @param X_rate regular-in-time multiplicative factor for the x axis (x-coordinates are multiplicated by \code{(X_rate*time + 1 - time)} where \code{time} goes from 0 to 1)
-#' @param Y_rate regular-in-time multiplicative factor for the y axis (y-coordinates are multiplicated by \code{(Y_rate*time + 1 - time)} where \code{time} goes from 0 to 1)
 #' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
-#' segment_to_circle()
-segment_to_circle <- function(n = 1000,
+#' circle_extinction()
+circle_extinction <- function(n = 1000,
                               change = 0.5,
                               time_sampling = "unif",
-                              nb_levels = 20,
-                              X_rate = 1,
-                              Y_rate = 1)
+                              nb_levels = 20)
 {
   #####
   ##### inner function start
@@ -28,16 +23,14 @@ segment_to_circle <- function(n = 1000,
     if(times < change)  ### in the move from segment to circle
     {
       time_scale <- times/change ### time scaling
-      a <- cos(pi/2 * time_scale)
-      b <- sin(pi/2 * time_scale)
-      x <- (pos * a + b * cos(pos - pi/2)) * (X_rate*times + 1 - times)
-      y <- (b * (1 + sin(pos - pi/2))) * (Y_rate*times + 1 - times)
+      x <- cos(pos - pi/2)
+      y <- sin(pos - pi/2)*(1 - time_scale)
       return(c(times, x, y))
     }
     if(times >= change) ### point on a unit circle
     {
-      x <- cos(pos - pi/2) * (X_rate*times + 1 - times)
-      y <- (1 + sin(pos - pi/2)) * (Y_rate*times + 1 - times)
+      x <- cos(pos - pi/2)
+      y <- 0
       return(c(times, x, y))
     }
   }

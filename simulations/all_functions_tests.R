@@ -1,20 +1,30 @@
 
+library(plotly)
+
+# data: segment_to_circle
+# PD at all time step : Generate_All_Persistence_Diagrams (all_PD)
+# plot : Plot_All_Persistence_Diagrams
+
+# remove points (filter all_PD) : remove_noisy_points
+# distances (between all_PD) : distances_Persistence_Diagrams
 
 ################
-#### data
+#### data segment_to_circle
 ################
+
 
 nb_levels <- 20
 data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
 data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.2)
 data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.2)
-#data <- segment_to_circle(n = 1000, time_sampling = "unif")
-data <- circle_distortion(X_rate = 3, Y_rate = 1)
+#data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
 
 ######## plot the data
 
-library(plotly)
-resScale <- rbind(data,c(0,-pi,pi),c(0,pi,pi),c(0, pi,-pi),c(0,-pi,-pi)) ### add 4 points in the corners for scaling x and y axes
+minD <- min(data$x, data$y)
+maxD <- max(data$x, data$y)
+M <- max(minD, maxD)
+resScale <- rbind(data,c(0,minD,minD),c(0,minD,maxD),c(0, maxD,minD),c(0,maxD,maxD)) ### add 4 points in the corners for scaling x and y axes
 plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
         type="scatter3d", mode = "markers", color = resScale$t)
 
@@ -31,20 +41,29 @@ all_PD %>% print(n = 100)
 ################
 birth <- 0.3
 death <- 0.02
-Plot_All_Persistence_Diagrams(data, birth = birth, death = death, nb_levels = nb_levels)
+diag <- 0.
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = nb_levels)
 
 
 ################
 #### thresholding
 ################
-all_PD <- remove_noisy_points(all_PD, birth = birth, death = death, infinity = FALSE)
+all_filter <- remove_noisy_points(all_PD,
+                                  birth = birth,
+                                  death = death,
+                                  diagonal = diag,
+                                  infinity = FALSE)
 
 
 ################
 #### distances: Wasserstein
 ################
 
-D_wasserstein <- distances_Persistence_Diagrams(all_PD, type = "2by2")
+D_wasserstein <- distances_Persistence_Diagrams(all_filter, type = "2by2")
 par(mfrow = c(1,1))
 library(fields)
 D_wasserstein <- t(D_wasserstein)

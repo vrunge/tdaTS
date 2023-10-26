@@ -4,7 +4,13 @@
 \alias{Plot_All_Persistence_Diagrams}
 \title{Plot_All_Persistence_Diagrams}
 \usage{
-Plot_All_Persistence_Diagrams(data, nb_levels = 20, birth = Inf, death = 0)
+Plot_All_Persistence_Diagrams(
+  data,
+  nb_levels = 20,
+  birth = Inf,
+  death = 0,
+  diagonal = 0
+)
 }
 \arguments{
 \item{data}{tibble with 3 columns (t,x,y) and n rows}
@@ -14,6 +20,8 @@ Plot_All_Persistence_Diagrams(data, nb_levels = 20, birth = Inf, death = 0)
 \item{birth}{vertical threshold}
 
 \item{death}{horizontal threshold}
+
+\item{diagonal}{diagonal threshold (distance to the diagonal)}
 }
 \value{
 tibble with 3 columns (t,x,y) and n rows

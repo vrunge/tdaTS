@@ -1,5 +1,26 @@
 
 
+#' remove_noisy_points
+#'
+#' @description Removing points from the persistence diagram out of the vertical, horizontal or diagonal boundaries
+#' @param PD Persistence diagram with 4 columns: time, dimension, Birth, Death.
+#' @param birth vertical threshold
+#' @param death horizontal threshold
+#' @param diagonal diagonal threshold (the distance to the diagonal)
+#' @param infinity if FALSE we remove points with infinite "Death" values
+#' @return The PD filtrated by the 3 boundaries (and the Inf points)
+remove_noisy_points <- function(PD, birth = Inf, death = 0, diagonal = 0, infinity = FALSE)
+{
+  Birth <- Death <- NULL
+  if(infinity == TRUE){PD <- PD %>% filter(Birth < birth & Death > death & (Death - Birth > diagonal))}
+  if(infinity == FALSE){PD <- PD %>% filter(Birth < birth & Death > death & (Death - Birth > diagonal) & Death != Inf)}
+  return(PD)
+}
+
+
+
+#########################################################################################################
+
 #' proj_Points
 #'
 #' @description Generating projective points from the persistence diagram in the diagonal, a vertical line and an horizontal line
@@ -44,22 +65,5 @@ proj_Points <- function(PD, v = 0, h = 0)
 
   colnames(projPoints) <- c("time", "dimension", "Birth", "Death")
   return(projPoints)
-}
-
-
-#' remove_noisy_points
-#'
-#' @description Removing points from the persistence diagram out of the vertical and horizontal boundaries
-#' @param PD Persistence diagram with 4 columns:  time, dimension, Birth, Death.
-#' @param birth vertical threshold
-#' @param death horizontal threshold
-#' @param infinity if FALSE we remove points with infinite "Death" value
-#' @return The PD filtrated by the 2 boundaries (and the Inf points)
-remove_noisy_points <- function(PD, birth = Inf, death = 0, infinity = FALSE)
-{
-  Birth <- Death <- NULL
-  if(infinity == TRUE){PD <- PD %>% filter(Birth < birth & Death > death)}
-  if(infinity == FALSE){PD <- PD %>% filter(Birth < birth & Death > death & Death != Inf)}
-  return(PD)
 }
 

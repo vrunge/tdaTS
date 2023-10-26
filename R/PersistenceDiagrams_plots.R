@@ -7,6 +7,7 @@
 #' @param nb_levels number of chunk
 #' @param birth vertical threshold
 #' @param death horizontal threshold
+#' @param diagonal diagonal threshold (distance to the diagonal)
 #' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
 #' data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
@@ -14,10 +15,11 @@
 Plot_All_Persistence_Diagrams <- function(data,
                                           nb_levels = 20,
                                           birth = Inf,
-                                          death = 0)
+                                          death = 0,
+                                          diagonal = 0)
 {
   x <- y <- NULL
-  opar <- par()
+  opar <- par(no.readonly = TRUE)
   n <- data %>% nrow()
 
   ###
@@ -54,8 +56,9 @@ Plot_All_Persistence_Diagrams <- function(data,
       dd <- DiagAlphaCmplx$diagram[,3]
       dd[is.infinite(dd)] <- NA
       my_max <- max(dd, na.rm = TRUE)
-      segments(x0 = birth, y0 = birth, x1 = birth, y1 = my_max, col = 1, lwd = 1.5)
-      segments(x0 = 0, y0 = death, x1 = death, y1 = death, col = 1, lwd = 1.5)
+      segments(x0 = birth, y0 = birth + diagonal, x1 = birth, y1 = my_max, col = 1, lwd = 1.5) #vertical
+      segments(x0 = 0, y0 = death, x1 = death, y1 = death, col = 1, lwd = 1.5) #horizontal
+      segments(x0 = 0, y0 = diagonal, x1 = birth, y1 = birth + diagonal, col = 1, lwd = 1.5) #diagonal
   }
   mtext("Sequence of Persistence Diagrams", side = 3, line = - 2, outer = TRUE)
 

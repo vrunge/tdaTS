@@ -4,20 +4,22 @@
 \alias{remove_noisy_points}
 \title{remove_noisy_points}
 \usage{
-remove_noisy_points(PD, birth = Inf, death = 0, infinity = FALSE)
+remove_noisy_points(PD, birth = Inf, death = 0, diagonal = 0, infinity = FALSE)
 }
 \arguments{
-\item{PD}{Persistence diagram with 4 columns:  time, dimension, Birth, Death.}
+\item{PD}{Persistence diagram with 4 columns: time, dimension, Birth, Death.}
 
 \item{birth}{vertical threshold}
 
 \item{death}{horizontal threshold}
 
-\item{infinity}{if FALSE we remove points with infinite "Death" value}
+\item{diagonal}{diagonal threshold (the distance to the diagonal)}
+
+\item{infinity}{if FALSE we remove points with infinite "Death" values}
 }
 \value{
-The PD filtrated by the 2 boundaries (and the Inf points)
+The PD filtrated by the 3 boundaries (and the Inf points)
 }
 \description{
-Removing points from the persistence diagram out of the vertical and horizontal boundaries
+Removing points from the persistence diagram out of the vertical, horizontal or diagonal boundaries
 }
