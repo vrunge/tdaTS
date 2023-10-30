@@ -1,0 +1,300 @@
+---
+title: | 
+   |  Study of the Sequence of Persistence Diagrams
+subtitle:  "Some simple examples"
+author: "Vincent Runge"
+date: "29/10/2023"
+output:
+  html_document:
+    keep_md: true
+    css: styles.css
+    toc: true
+    toc_float: true
+    highlight: tango
+    number_sections: true
+---
+
+
+```{r setup, include = FALSE, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+```{r, message=FALSE}
+library(tdaTS) #our package
+library(plotly) #3D plotting
+library(fields) #image.plot function
+```
+
+
+# data generators
+
+The simple 3D plot function using function `plot_ly` function from the `plotly` package.
+
+```{r}
+myplot_3D <- function(data)
+{
+  minD <- min(data$x, data$y)
+  maxD <- max(data$x, data$y)
+  M <- max(minD, maxD)
+  resScale <- rbind(data,c(0,minD,minD),c(0,minD,maxD),c(0, maxD,minD),c(0,maxD,maxD)) ### add 4 points in the corners for scaling x and y axes
+  plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
+          type="scatter3d", mode = "markers", color = resScale$t)
+}
+```
+
+We propose, as a starting point, the following four data generators. You give an example for each of the generators. 
+
+
+## Segment to circle (isometric)
+
+
+We close a segment into a circle, maintaining the length of the curve (2 pi)
+
+```{r}
+data <- segment_to_circle(n = 1000, 
+                          change = 0.5, 
+                          time_sampling = "unif")
+
+# an example with additional noise
+
+data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.2)
+data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.2)
+
+######## plot the data
+myplot_3D(data)
+
+```
+
+
+## Circle extinction
+
+
+The circle is smashed into a segment equal to the diameter of the initial circle. 
+
+```{r}
+data <- circle_extinction(n = 1000,
+                          change = 0.5,
+                          time_sampling = "unif")
+myplot_3D(data)
+```
+
+
+
+## Segment to Segments
+
+we split a segment at the changepoint in two at the center point with regular speed with final `gap = 0.1` here.
+
+```{r}
+data <- segment_to_segments(n = 1000, 
+                            change = 0.5, 
+                            gap = 0.1)
+myplot_3D(data)
+```
+
+
+
+
+## Circle move and distortion
+
+An example with no change. We deform the shape in a ellipse, both rotationg and shifting it. 
+
+```{r}
+data <- circle_move_distortion(n = 1000, 
+                               rotation = 2, 
+                               X_rate = 0.5, 
+                               Y_rate = 3)
+myplot_3D(data)
+```
+
+
+In most example, there is the possibility to use parameters `X_rate` and/or `Y_rate` to extend or contract the shape and then to change the density of points by level (not their number)
+
+```{r}
+data <- segment_to_circle(n = 1000,
+                          change = 0.5,
+                          X_rate = 0.5,
+                          Y_rate = 3)
+myplot_3D(data)
+```
+
+
+
+# Sequence of Persistence Diagrams
+
+In following sections, we will filter the Diagrams using 3 possible thresholds:
+
+```{r}
+birth <- 0.15
+death <- 0.17
+diag <- 0.1
+```
+
+The `birth` threshold is a vertical threshold
+
+The `death` threshold is a horizontal threshold
+
+The `diag` threshold is a diagonal threshold
+
+The objective would be to remove the noise part of each of the persistence diagrams.
+
+**We still need to find the right approach to filter the noise (considering filtering by ratio death/birth maybe?)**
+
+
+## One example segment to Circle
+
+In 3 steps
+
+1. result with no noise
+
+2. result with additional noise
+
+3. segment comparison with matrix of cross Wasserstein distance using dimension 1 elements
+
+
+```{r, message=FALSE}
+set.seed(7)
+data <- segment_to_circle(n = 1000, 
+                          change = 0.5, 
+                          time_sampling = "unif")
+
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = 20)
+```
+
+
+
+```{r}
+data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.1)
+data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.1)
+
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = 20)
+```
+
+
+```{r}
+nb_levels <- 20
+all_PD <- Generate_All_Persistence_Diagrams(data, 
+                                            nb_levels = nb_levels)
+################
+#### thresholding
+################
+all_filter <- remove_noisy_points(all_PD,
+                                  birth = birth,
+                                  death = death,
+                                  diagonal = diag,
+                                  infinity = FALSE)
+################
+#### distances: Wasserstein
+################
+mydim <- 1 #choice for dimension in PD
+
+t(all_filter[,1:2]) %>% as.matrix()
+
+D_wasserstein_2by2 <- distances_Persistence_Diagrams(all_filter, type = "2by2", dimension = mydim)
+par(mfrow = c(1,1))
+
+D_wasserstein_2by2 <- t(D_wasserstein_2by2)
+image.plot(D_wasserstein_2by2[,nrow(D_wasserstein_2by2):1], axes = F,  col = grey(seq(0,1, length = 256)))
+axis(1, at=seq(0,1,length.out = nb_levels), labels= 1:nb_levels)
+axis(2, at=seq(0,1,length.out = nb_levels), labels= nb_levels:1)
+segments(0,0.5,1,0.5, col = 2, lwd = 4)
+segments(0.5,0,0.5,1, col = 2, lwd = 4)
+```
+
+
+## Example circle_extinction
+
+
+```{r}
+set.seed(7)
+data <- circle_extinction(n = 2000,
+                          change = 0.5,
+                          time_sampling = "unif")
+
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = 20)
+```
+
+
+
+## Example segment_to_segments
+
+
+```{r}
+data <- segment_to_segments(n = 1000, 
+                            change = 0.5, 
+                            gap = 0.5)
+
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = 20)
+```
+
+
+
+## Example circle_move_distortion
+
+
+```{r}
+data <- circle_move_distortion(n = 1000, 
+                               rotation = 2, 
+                               X_rate = 0.5, 
+                               Y_rate = 3)
+
+Plot_All_Persistence_Diagrams(data,
+                              birth = birth,
+                              death = death,
+                              diagonal = diag,
+                              nb_levels = 20)
+
+
+nb_levels <- 20
+all_PD <- Generate_All_Persistence_Diagrams(data, 
+                                            nb_levels = nb_levels)
+################
+#### thresholding
+################
+all_filter <- remove_noisy_points(all_PD,
+                                  birth = birth,
+                                  death = death,
+                                  diagonal = diag,
+                                  infinity = FALSE)
+################
+#### distances: Wasserstein
+################
+mydim <- 1 #choice for dimension in PD
+
+t(all_filter[,1:2]) %>% as.matrix()
+
+D_wasserstein_2by2 <- distances_Persistence_Diagrams(all_filter, type = "2by2", dimension = mydim)
+par(mfrow = c(1,1))
+
+D_wasserstein_2by2 <- t(D_wasserstein_2by2)
+image.plot(D_wasserstein_2by2[,nrow(D_wasserstein_2by2):1], axes = F,  col = grey(seq(0,1, length = 256)))
+axis(1, at=seq(0,1,length.out = nb_levels), labels= 1:nb_levels)
+axis(2, at=seq(0,1,length.out = nb_levels), labels= nb_levels:1)
+segments(0,0.5,1,0.5, col = 2, lwd = 4)
+segments(0.5,0,0.5,1, col = 2, lwd = 4)
+```
+
+
+# Removing the noise structure 
+
+Need to think...
+
+
+
+

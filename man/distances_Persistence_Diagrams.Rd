@@ -4,7 +4,12 @@
 \alias{distances_Persistence_Diagrams}
 \title{distances_Persistence_Diagrams}
 \usage{
-distances_Persistence_Diagrams(PD, distance = "wasserstein", type = "2by2")
+distances_Persistence_Diagrams(
+  PD,
+  distance = "wasserstein",
+  type = "2by2",
+  dimension = 1
+)
 }
 \arguments{
 \item{PD}{Persistence diagram with 4 columns:  time, dimension, Birth, Death.}
@@ -12,6 +17,8 @@ distances_Persistence_Diagrams(PD, distance = "wasserstein", type = "2by2")
 \item{distance}{Type of distance used}
 
 \item{type}{1by1 (segment versus segment) comparisons or 2by2 (PD by PD) comparisons}
+
+\item{dimension}{dimension to chose in Persitence diagram}
 }
 \description{
 Function computing distances between Persistence Diagrams

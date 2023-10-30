@@ -4,12 +4,14 @@
 \alias{Generate_All_Persistence_Diagrams}
 \title{Generate_All_Persistence_Diagrams}
 \usage{
-Generate_All_Persistence_Diagrams(data, nb_levels = 20)
+Generate_All_Persistence_Diagrams(data, nb_levels = 20, printProgress = FALSE)
 }
 \arguments{
 \item{data}{tibble data with columns (time,x,y)}
 
 \item{nb_levels}{number of regular slices to be considered for the time variable}
+
+\item{printProgress}{print or not the algo progress (TRUE or FALSE)}
 }
 \value{
 tibble of the sequence of Persistence Diagrams with columns (time, dimension, Birth, Death). "time" is the position of the persistence diagram in the sequence of diagrams.

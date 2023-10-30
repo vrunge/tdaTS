@@ -4,8 +4,11 @@
 #' @description Function generating a sequence of Persistence Diagrams using tibble data with columns (time,x,y)
 #' @param data tibble data with columns (time,x,y)
 #' @param nb_levels number of regular slices to be considered for the time variable
+#' @param printProgress print or not the algo progress (TRUE or FALSE)
 #' @return tibble of the sequence of Persistence Diagrams with columns (time, dimension, Birth, Death). "time" is the position of the persistence diagram in the sequence of diagrams.
-Generate_All_Persistence_Diagrams <- function(data, nb_levels = 20)
+Generate_All_Persistence_Diagrams <- function(data,
+                                              nb_levels = 20,
+                                              printProgress = FALSE)
 {
   n <- data %>% nrow()
 
@@ -28,7 +31,7 @@ Generate_All_Persistence_Diagrams <- function(data, nb_levels = 20)
                           X = data_slice %>% select(-c("t")),
                           library = c("GUDHI", "Dionysus"),
                           location = TRUE,
-                          printProgress = TRUE)
+                          printProgress = printProgress)
 
     diagramAndNB <- cbind(k, DiagAlphaCmplx$diagram)
     All_PD <- rbind(All_PD, diagramAndNB)

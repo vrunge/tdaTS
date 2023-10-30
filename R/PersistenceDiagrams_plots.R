@@ -8,6 +8,7 @@
 #' @param birth vertical threshold
 #' @param death horizontal threshold
 #' @param diagonal diagonal threshold (distance to the diagonal)
+#' @param printProgress print or not the algo progress (TRUE or FALSE)
 #' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
 #' data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
@@ -16,12 +17,14 @@ Plot_All_Persistence_Diagrams <- function(data,
                                           nb_levels = 20,
                                           birth = Inf,
                                           death = 0,
-                                          diagonal = 0)
+                                          diagonal = 0,
+                                          printProgress = FALSE)
 {
   x <- y <- NULL
   opar <- par(no.readonly = TRUE)
   n <- data %>% nrow()
 
+  #############################################################################################
   ###
   ### creating slices of size h such that h * nb_levels = max t - min t
   ###
@@ -33,35 +36,36 @@ Plot_All_Persistence_Diagrams <- function(data,
   ###
   ###
 
-  u <- floor(sqrt(nb_levels))
-
+  #############################################################################################
   ###
   ### PLOT 1
   ###
-  if (nb_levels <= u*(u+1)){par(mfrow = c(u+1, u), mar=c(1,2,2,0), mgp=c(1.5,0.5,0))}
+  u <- floor(sqrt(nb_levels))
+  if (nb_levels <= u*(u+1)){par(mfrow = c(u+1, u), mar=c(1,2,1,0), mgp=c(1.5,0.5,0))}
   else{par(mfrow = c(u+1, u+1), mar=c(1,2,2,0), mgp=c(1.5,0.5,0))}
 
   for(k in 0:(nb_levels-1))
   {
     data_slice <- data %>% filter(v == k)
 
-    DiagAlphaCmplx <- alphaComplexDiag(
-      X = data_slice %>% select(-c("t")),
-      library = c("GUDHI", "Dionysus"),
-      location = TRUE,
-      printProgress = TRUE)
-
-      plot(DiagAlphaCmplx$diagram, col = 1 + cumsum(DiagAlphaCmplx[["diagram"]][, 1]))
+    DiagAlphaCmplx <- alphaComplexDiag(X = data_slice %>% select(-c("t")),
+                                       library = c("GUDHI", "Dionysus"),
+                                       location = TRUE,
+                                       printProgress = printProgress)
+      plot(DiagAlphaCmplx$diagram, col = 1 + cumsum(DiagAlphaCmplx$diagram[, 1]))
 
       dd <- DiagAlphaCmplx$diagram[,3]
       dd[is.infinite(dd)] <- NA
       my_max <- max(dd, na.rm = TRUE)
-      segments(x0 = birth, y0 = birth + diagonal, x1 = birth, y1 = my_max, col = 1, lwd = 1.5) #vertical
-      segments(x0 = 0, y0 = death, x1 = death, y1 = death, col = 1, lwd = 1.5) #horizontal
-      segments(x0 = 0, y0 = diagonal, x1 = birth, y1 = birth + diagonal, col = 1, lwd = 1.5) #diagonal
+      segments(x0 = birth, y0 = birth + diagonal, x1 = birth, y1 = my_max, col = 2, lwd = 2) #vertical
+      segments(x0 = 0, y0 = death, x1 = death - diagonal, y1 = death, col = 2, lwd = 2) #horizontal
+      birth2 <- birth
+      if(birth2 == Inf){birth2 <- my_max}
+      segments(x0 = death - diagonal, y0 = death, x1 = birth2, y1 = birth2 + diagonal, col = 2, lwd = 2) #diagonal
   }
   mtext("Sequence of Persistence Diagrams", side = 3, line = - 2, outer = TRUE)
 
+  #############################################################################################
   ###
   ### PLOT 2
   ###
@@ -79,7 +83,7 @@ Plot_All_Persistence_Diagrams <- function(data,
       X = X,
       library = c("GUDHI", "Dionysus"),
       location = TRUE,
-      printProgress = FALSE)
+      printProgress = printProgress)
     plot(X, col = 1,xaxt="n", yaxt="n",xlab="", ylab="", xlim = xl, ylim = yl, asp = 1)
     one <- which(DiagAlphaCmplx[["diagram"]][, 1] == 1)
     for (i in seq(along = one))

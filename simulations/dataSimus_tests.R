@@ -7,7 +7,7 @@ library(plotly)
 ################
 
 nb_levels <- 20
-data <- circle_move_distortion(n = 10000, rotation = 2, X_rate = 0.5, Y_rate = 3)
+data <- circle_move_distortion(n = 10000, rotation = 4, X_rate = 0.5, Y_rate = 3)
 
 ######## plot the data
 

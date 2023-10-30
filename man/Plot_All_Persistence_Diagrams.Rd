@@ -9,7 +9,8 @@ Plot_All_Persistence_Diagrams(
   nb_levels = 20,
   birth = Inf,
   death = 0,
-  diagonal = 0
+  diagonal = 0,
+  printProgress = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ Plot_All_Persistence_Diagrams(
 \item{death}{horizontal threshold}
 
 \item{diagonal}{diagonal threshold (distance to the diagonal)}
+
+\item{printProgress}{print or not the algo progress (TRUE or FALSE)}
 }
 \value{
 tibble with 3 columns (t,x,y) and n rows

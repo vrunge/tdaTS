@@ -15,8 +15,8 @@ library(plotly)
 
 nb_levels <- 20
 data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
-data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.2)
-data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.2)
+data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.02)
+data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.02)
 #data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
 
 ######## plot the data
@@ -39,9 +39,9 @@ all_PD %>% print(n = 100)
 ################
 #### verif with plots and thresholding
 ################
-birth <- 0.3
-death <- 0.02
-diag <- 0.
+birth <- Inf
+death <- 0
+diag <- 0.0001
 Plot_All_Persistence_Diagrams(data,
                               birth = birth,
                               death = death,
@@ -62,16 +62,27 @@ all_filter <- remove_noisy_points(all_PD,
 ################
 #### distances: Wasserstein
 ################
+mydim <- 0 #choice for dimension in PD
 
-D_wasserstein <- distances_Persistence_Diagrams(all_filter, type = "2by2")
+t(all_filter[,1:2]) %>% as.matrix()
+
+D_wasserstein_2by2 <- distances_Persistence_Diagrams(all_filter, type = "2by2", dimension = mydim)
 par(mfrow = c(1,1))
 library(fields)
-D_wasserstein <- t(D_wasserstein)
-image.plot(D_wasserstein[,nrow(D_wasserstein):1], axes = F,  col = grey(seq(0,1, length = 256)))
+D_wasserstein_2by2 <- t(D_wasserstein_2by2)
+image.plot(D_wasserstein_2by2[,nrow(D_wasserstein_2by2):1], axes = F,  col = grey(seq(0,1, length = 256)))
 axis(1, at=seq(0,1,length.out = nb_levels), labels= 1:nb_levels)
 axis(2, at=seq(0,1,length.out = nb_levels), labels= nb_levels:1)
 segments(0,0.5,1,0.5, col = 2, lwd = 4)
 segments(0.5,0,0.5,1, col = 2, lwd = 4)
+
+
+
+D_wasserstein_1by1 <- distances_Persistence_Diagrams(all_filter, type = "1by1", dimension = mydim)
+par(mfrow = c(1,1))
+library(fields)
+D_wasserstein_1by1 <- diag(D_wasserstein_1by1)
+plot(D_wasserstein_1by1, type = 'b')
 
 
 ###
@@ -80,5 +91,11 @@ segments(0.5,0,0.5,1, col = 2, lwd = 4)
 ### adapted Wasserstein truncated Wasserstein truncated
 ### (using proj_Points function to generating projective points on the boundaries)
 ### + improve function proj_Points for tibble operations pipe %>%
+
+
+### Rmd with different tests
+
+
+
 
 
