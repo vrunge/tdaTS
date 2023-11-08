@@ -9,16 +9,19 @@
 #' @param death horizontal threshold
 #' @param diagonal diagonal threshold (distance to the diagonal)
 #' @param printProgress print or not the algo progress (TRUE or FALSE)
+#' @param barcode plot a barcode (TRUE) or a presistence diagram (FALSE)
 #' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
 #' data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
 #' Plot_All_Persistence_Diagrams(data, birth = 0.3, death = 0.2, nb_levels = 20)
+
 Plot_All_Persistence_Diagrams <- function(data,
                                           nb_levels = 20,
                                           birth = Inf,
                                           death = 0,
                                           diagonal = 0,
-                                          printProgress = FALSE)
+                                          printProgress = FALSE,
+                                          barcode = FALSE)
 {
   x <- y <- NULL
   opar <- par(no.readonly = TRUE)
@@ -52,7 +55,7 @@ Plot_All_Persistence_Diagrams <- function(data,
                                        library = c("GUDHI", "Dionysus"),
                                        location = TRUE,
                                        printProgress = printProgress)
-      plot(DiagAlphaCmplx$diagram, col = 1 + cumsum(DiagAlphaCmplx$diagram[, 1]))
+      plot(DiagAlphaCmplx$diagram, barcode = barcode, col = 1 + cumsum(DiagAlphaCmplx$diagram[, 1]))
 
       dd <- DiagAlphaCmplx$diagram[,3]
       dd[is.infinite(dd)] <- NA

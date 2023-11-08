@@ -10,7 +10,8 @@ Plot_All_Persistence_Diagrams(
   birth = Inf,
   death = 0,
   diagonal = 0,
-  printProgress = FALSE
+  printProgress = FALSE,
+  barcode = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ Plot_All_Persistence_Diagrams(
 \item{diagonal}{diagonal threshold (distance to the diagonal)}
 
 \item{printProgress}{print or not the algo progress (TRUE or FALSE)}
+
+\item{barcode}{plot a barcode (TRUE) or a presistence diagram (FALSE)}
 }
 \value{
 tibble with 3 columns (t,x,y) and n rows

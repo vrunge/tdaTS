@@ -100,7 +100,7 @@ myplot_3D(data)
 An example with no change. We deform the shape in a ellipse, both rotationg and shifting it. 
 
 ```{r}
-data <- circle_move_distortion(n = 1000, 
+data <- circle_move_distortion(n = 10000, 
                                rotation = 2, 
                                X_rate = 0.5, 
                                Y_rate = 3)
@@ -249,11 +249,14 @@ Plot_All_Persistence_Diagrams(data,
 
 
 ```{r}
-data <- circle_move_distortion(n = 1000, 
+data <- circle_move_distortion(n = 10000, 
                                rotation = 2, 
-                               X_rate = 0.5, 
-                               Y_rate = 3)
+                               X_rate = 5, 
+                               Y_rate = 1, time_sampling = "discrete",
+                              nb_levels = 20)
 
+data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.1)
+data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.1)
 Plot_All_Persistence_Diagrams(data,
                               birth = birth,
                               death = death,
@@ -293,8 +296,52 @@ segments(0.5,0,0.5,1, col = 2, lwd = 4)
 
 # Removing the noise structure 
 
-Need to think...
+1. Need to think...
 
+2. Need to look at the litterature 
+
+3. Threshold diagonal ? death over birth ratio ?
+
+
+## Multiple circles in the 2d plane
+
+
+```{r}
+library(TDA)
+circle <- function(n = 1000, center = c(0,0), radius = 1, noise = 0.5)
+{
+  pos <- runif(n, min = 0, max = 2*pi) 
+  x <- center[1] + radius*cos(pos) + rnorm(n, mean = 0, sd = noise)
+  y <- center[2] + radius*sin(pos) + rnorm(n, mean = 0, sd = noise)
+
+  res <- matrix(c(x,y), nrow = n, byrow = FALSE)
+  return(res)
+}
+
+data <- circle()
+
+DiagAlphaCmplx <- alphaComplexDiag(X = data ,
+                            library = c("GUDHI", "Dionysus"),
+                            location = TRUE,
+                            printProgress = FALSE)
+plot(DiagAlphaCmplx$diagram, col = 1 + cumsum(DiagAlphaCmplx$diagram[, 1]))
+
+
+plot(data, col = 1,xaxt="n", yaxt="n",xlab="", ylab="", asp = 1)
+    one <- which(DiagAlphaCmplx[["diagram"]][, 1] == 1)
+    for (i in seq(along = one))
+    {
+      for (j in seq_len(dim(DiagAlphaCmplx[["cycleLocation"]][[one[i]]])[1]))
+      {
+        lines(DiagAlphaCmplx[["cycleLocation"]][[one[i]]][j, , ] + rnorm(n = 4,sd = 0.0), pch = 19, cex = 1, col = i + 1)
+      }
+    }
+
+dia <-    DiagAlphaCmplx$diagram[DiagAlphaCmplx$diagram[,1] == 1,]
+
+hist(log(dia[,3]/dia[,2]), breaks = 20)
+    
+```
 
 
 
