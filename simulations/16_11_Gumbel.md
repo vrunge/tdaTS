@@ -91,7 +91,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-2.png)<!-- -->
 
 ```
-## [1] 1.698904
+## [1] 1.615747
 ```
 
 ```r
@@ -102,7 +102,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-4.png)<!-- -->
 
 ```
-## [1] 1.819073
+## [1] 1.800308
 ```
 
 ```r
@@ -113,7 +113,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-6.png)<!-- -->
 
 ```
-## [1] 1.950714
+## [1] 1.943965
 ```
 
 
@@ -129,7 +129,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-2.png)<!-- -->
 
 ```
-## [1] 1.472017
+## [1] 1.312419
 ```
 
 ```r
@@ -140,7 +140,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-4.png)<!-- -->
 
 ```
-## [1] 1.620853
+## [1] 1.689273
 ```
 
 ```r
@@ -151,7 +151,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-6.png)<!-- -->
 
 ```
-## [1] 1.955107
+## [1] 1.944635
 ```
 
 
@@ -166,7 +166,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
 
 ```
-## [1] 1.204325
+## [1] 1.069817
 ```
 
 ```r
@@ -177,7 +177,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-4.png)<!-- -->
 
 ```
-## [1] 1.333185
+## [1] 1.424552
 ```
 
 ```r
@@ -188,7 +188,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-6.png)<!-- -->
 
 ```
-## [1] 1.455352
+## [1] 1.399019
 ```
 
 
@@ -206,7 +206,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
 
 ```
-## [1] 1.828586
+## [1] 1.697045
 ```
 
 ```r
@@ -219,7 +219,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-4.png)<!-- -->
 
 ```
-## [1] 1.747761
+## [1] 1.715343
 ```
 
 ```r
@@ -232,7 +232,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-6.png)<!-- -->
 
 ```
-## [1] 1.003623
+## [1] 1.15075
 ```
 
 ```r
@@ -245,7 +245,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-7.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-8.png)<!-- -->
 
 ```
-## [1] 1.271927
+## [1] 0.77569
 ```
 
 # Comparing different noise 
@@ -261,7 +261,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
 
 ```
-## [1] 1.302771
+## [1] 1.328638
 ```
 
 ```r
@@ -275,7 +275,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-4.png)<!-- -->
 
 ```
-## [1] 1.306389
+## [1] 1.437495
 ```
 
 Gaussian versus Uniform noise 10000 data points
@@ -289,7 +289,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law-2.png)<!-- -->
 
 ```
-## [1] 1.503046
+## [1] 1.549178
 ```
 
 ```r
@@ -303,7 +303,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law-4.png)<!-- -->
 
 ```
-## [1] 1.466386
+## [1] 1.413658
 ```
 
 The Square with a hole? 
@@ -316,7 +316,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law 2-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law 2-2.png)<!-- -->
 
 ```
-## [1] 1.466386
+## [1] 1.413658
 ```
 
 
@@ -334,7 +334,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law 4-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law 4-2.png)<!-- -->
 
 ```
-## [1] 2.308892
+## [1] 2.299
 ```
 
 
@@ -352,7 +352,7 @@ dim(diagALPHA)
 ```
 
 ```
-## [1] 59844     3
+## [1] 59628     3
 ```
 
 ```r
@@ -361,7 +361,7 @@ sum(sel)
 ```
 
 ```
-## [1] 29844
+## [1] 29628
 ```
 
 ```r
@@ -372,7 +372,7 @@ max(gumbel)
 ```
 
 ```
-## [1] 1.48753
+## [1] 1.484492
 ```
 
 ```r
@@ -419,7 +419,7 @@ sum(pvalue < 0.005) #how many time we "see" the hole
 ```
 
 ```
-## [1] 99
+## [1] 93
 ```
 
 
@@ -454,7 +454,7 @@ sum(pvalue < 0.005) #how many time we "see" the hole
 ```
 
 ```
-## [1] 6
+## [1] 2
 ```
 
 

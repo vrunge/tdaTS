@@ -122,24 +122,16 @@ pl <- myplots(data); pl$maxValue
 
 
 ```{r}
-data<- data2D_pointCircleGap(100, 0)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data<- data2D_pointEllipseMissingArc(100, 0)
 pl <- myplots(data); pl$maxValue
 
-data <- data2D_pointCircleGap(100, 0.1)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1)
 pl <- myplots(data); pl$maxValue
 
-data <- data2D_pointCircleGap(100, 0.2)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.2)
 pl <- myplots(data); pl$maxValue
 
-data <- data2D_pointCircleGap(100, 0.3)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.3)
 pl <- myplots(data); pl$maxValue
 ```
 
@@ -182,9 +174,7 @@ The circle closed + small noise
 
 
 ```{r ratio law 4}
-data <- data2D_pointCircleGap(10000, 0)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0)
 pl <- myplots(data); pl$maxValue
 ```
 
@@ -277,9 +267,7 @@ index <- (floor(0:599/100)+1)
 for(i in 1:600)
 {
   j <- index[i]
-  data <- data2D_pointCircleGap(j*100, 0.1)
-  data$x <- data$x + rnorm(n= j*100, mean = 0, sd = 0.05)
-  data$y <- data$y + rnorm(n = j*100, mean = 0, sd = 0.05)
+  data <- data2D_pointEllipseMissingArc(j*100, 0.1, 0.05)
   #plot(data)
   diagALPHA <- calculate_homology(data, dim = 1)
   sel <- diagALPHA[,1] == 1

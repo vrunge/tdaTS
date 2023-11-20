@@ -135,13 +135,13 @@ pl <- myplots(data)
 
 ```{r}
 
-data <- data2D_pointCircleGap(100, 0)
+data <- data2D_pointEllipseMissingArc(100, 0, 0)
 pl <- myplots(data)
-data <- data2D_pointCircleGap(100, 0.05)
+data <- data2D_pointEllipseMissingArc(100, 0.05, 0)
 pl <- myplots(data)
-data <- data2D_pointCircleGap(100, 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1, 0)
 pl <- myplots(data)
-data <- data2D_pointCircleGap(100, 0.3)
+data <- data2D_pointEllipseMissingArc(100, 0.3, 0)
 pl <- myplots(data)
 ```
 
@@ -152,24 +152,16 @@ The same with additional Gaussian noise.
 
 ```{r}
 
-data<- data2D_pointCircleGap(100, 0)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data<- data2D_pointEllipseMissingArc(100, 0)
 pl <- myplots(data)
 
-data <- data2D_pointCircleGap(100, 0.1)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1)
 pl <- myplots(data)
 
-data <- data2D_pointCircleGap(100, 0.2)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.2)
 pl <- myplots(data)
 
-data <- data2D_pointCircleGap(100, 0.3)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.3)
 pl <- myplots(data)
 ```
 
@@ -260,9 +252,7 @@ The circle closed + small noise
 
 
 ```{r ratio law 4}
-data <- data2D_pointCircleGap(10000, 0)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0, 0.01)
 diag3 <- myplots(data)
 sel <- diag3[,1] == 1
 res3 <- diag3[sel,3]/diag3[sel,2]
@@ -279,9 +269,7 @@ max(res3)
 The circle not closed + small noise
 
 ```{r ratio law 5}
-data <- data2D_pointCircleGap(10000, 0.03)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0.03, 0.01)
 diag3 <- myplots(data)
 sel <- diag3[,1] == 1
 res3 <- diag3[sel,3]/diag3[sel,2]

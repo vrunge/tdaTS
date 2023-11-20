@@ -3,6 +3,7 @@ exportPattern("^[[:alpha:]]+")
 importFrom("stats", "runif")
 importFrom("stats", "rnorm")
 importFrom("stats", "setNames")
+ importFrom("stats", "rbinom")
 
 importFrom("graphics", "lines", "mtext", "par", "segments")
 

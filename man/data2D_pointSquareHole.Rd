@@ -15,7 +15,7 @@ data2D_pointSquareHole(n, Hole_Relative_length = 0)
 tibble with 2 columns (x,y) and n rows
 }
 \description{
-Function generating a tibble with 2 columns named (x,y) with 2D data forming in a 1by1 square with a hole in its center of size `Hole_Relative_length
+Function generating a tibble with 2 columns named (x,y) with 2D data forming in a 1by1 square with a hole in its center of size \code{Hole_Relative_length}
 }
 \examples{
 data2D_pointSquareHole(1000)
