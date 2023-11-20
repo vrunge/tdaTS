@@ -33,7 +33,7 @@ data3D_almostCircle_to_circle(
 tibble with 3 columns (t,x,y) and n rows
 }
 \description{
-
+Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a circle almost closed, closing at time step \cite{change} into a circle. The transformation is "isometric" as the length of the object stays the same over time (= 2 x pi) (only if no distortion with \code{X_Rate = 1} and \code{Y_Rate = 1})
 }
 \examples{
 data3D_almostCircle_to_circle()

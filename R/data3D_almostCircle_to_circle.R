@@ -1,7 +1,7 @@
 
 #' data3D_almostCircle_to_circle
 #'
-#' @description Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a circle almost closed, closing at time step \cide{change) into a circle. The transformation is "isometric" as the length of the object stays the same over time (= 2 x pi) (only if no distortion with \code{X_Rate = 1} and \code{Y_Rate = 1})
+#' @description Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a circle almost closed, closing at time step \cite{change} into a circle. The transformation is "isometric" as the length of the object stays the same over time (= 2 x pi) (only if no distortion with \code{X_Rate = 1} and \code{Y_Rate = 1})
 #' @param n Overall number of points to draw
 #' @param change Relative location of the change (example: \code{change = 0.5} = at the middle of the data, time goes from 0 to 1 with this function)
 #' @param gap distance between the circle and the segment From 0 to 1. 0 = the circle, 1 = the segment
