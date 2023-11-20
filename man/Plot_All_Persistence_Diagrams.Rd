@@ -36,6 +36,6 @@ tibble with 3 columns (t,x,y) and n rows
 Function generating a tibble with 3 columns named (t,x,y) with data in the (x,y) plane forming a segment closing to a circle at the change-point location.
 }
 \examples{
-data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
+data <- data3D_segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
 Plot_All_Persistence_Diagrams(data, birth = 0.3, death = 0.2, nb_levels = 20)
 }

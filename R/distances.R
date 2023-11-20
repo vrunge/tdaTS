@@ -8,7 +8,7 @@
 #' @param type 1by1 (segment versus segment) comparisons or 2by2 (PD by PD) comparisons
 #' @param dimension dimension to chose in Persitence diagram
 #' @examples
-#' data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
+#' data <- data3D_segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
 #' all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = 20)
 #' distances_Persistence_Diagrams(all_PD)
 distances_Persistence_Diagrams <- function(PD, distance = "wasserstein", type = "2by2", dimension = 1)

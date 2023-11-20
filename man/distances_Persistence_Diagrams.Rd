@@ -24,7 +24,7 @@ distances_Persistence_Diagrams(
 Function computing distances between Persistence Diagrams
 }
 \examples{
-data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
+data <- data3D_segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
 all_PD <- Generate_All_Persistence_Diagrams(data, nb_levels = 20)
 distances_Persistence_Diagrams(all_PD)
 }

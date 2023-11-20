@@ -12,7 +12,7 @@
 #' @param barcode plot a barcode (TRUE) or a presistence diagram (FALSE)
 #' @return tibble with 3 columns (t,x,y) and n rows
 #' @examples
-#' data <- segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
+#' data <- data3D_segment_to_circle(n = 1000, time_sampling = "discrete", nb_levels = 20)
 #' Plot_All_Persistence_Diagrams(data, birth = 0.3, death = 0.2, nb_levels = 20)
 
 Plot_All_Persistence_Diagrams <- function(data,

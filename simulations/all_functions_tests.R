@@ -1,7 +1,7 @@
 
 library(plotly)
 
-# data: segment_to_circle
+# data: data3D_segment_to_circle
 # PD at all time step : Generate_All_Persistence_Diagrams (all_PD)
 # plot : Plot_All_Persistence_Diagrams
 
@@ -14,10 +14,10 @@ library(plotly)
 
 
 nb_levels <- 20
-data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
+data <- data3D_segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
 data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.02)
 data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.02)
-#data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
+#data <- data3D_segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
 
 ######## plot the data
 

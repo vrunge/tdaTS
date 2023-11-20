@@ -52,9 +52,9 @@ We propose, as a starting point, the following four data generators. You give an
 We close a segment into a circle, maintaining the length of the curve (2 pi)
 
 ```{r}
-data <- segment_to_circle(n = 1000, 
-                          change = 0.5, 
-                          time_sampling = "unif")
+data <- data3D_segment_to_circle(n = 1000, 
+                                 change = 0.5, 
+                                 time_sampling = "unif")
 
 # an example with additional noise
 
@@ -67,13 +67,13 @@ myplot_3D(data)
 ```
 
 
-## Circle extinction
+## data3D_circle_extinction
 
 
 The circle is smashed into a segment equal to the diameter of the initial circle. 
 
 ```{r}
-data <- circle_extinction(n = 1000,
+data <- data3D_circle_extinction(n = 1000,
                           change = 0.5,
                           time_sampling = "unif")
 myplot_3D(data)
@@ -86,7 +86,7 @@ myplot_3D(data)
 we split a segment at the changepoint in two at the center point with regular speed with final `gap = 0.1` here.
 
 ```{r}
-data <- segment_to_segments(n = 1000, 
+data <- data3D_segment_to_segments(n = 1000, 
                             change = 0.5, 
                             gap = 0.1)
 myplot_3D(data)
@@ -100,7 +100,7 @@ myplot_3D(data)
 An example with no change. We deform the shape in a ellipse, both rotationg and shifting it. 
 
 ```{r}
-data <- circle_move_distortion(n = 10000, 
+data <- data3D_circle_move_distortion(n = 10000, 
                                rotation = 2, 
                                X_rate = 0.5, 
                                Y_rate = 3)
@@ -111,10 +111,10 @@ myplot_3D(data)
 In most example, there is the possibility to use parameters `X_rate` and/or `Y_rate` to extend or contract the shape and then to change the density of points by level (not their number)
 
 ```{r}
-data <- segment_to_circle(n = 1000,
-                          change = 0.5,
-                          X_rate = 0.5,
-                          Y_rate = 3)
+data <- data3D_segment_to_circle(n = 1000,
+                                 change = 0.5,
+                                 X_rate = 0.5,
+                                 Y_rate = 3)
 myplot_3D(data)
 ```
 
@@ -210,12 +210,12 @@ segments(0.5,0,0.5,1, col = 2, lwd = 4)
 ```
 
 
-## Example circle_extinction
+## Example data3D_circle_extinction
 
 
 ```{r}
 set.seed(7)
-data <- circle_extinction(n = 2000,
+data <- data3D_circle_extinction(n = 2000,
                           change = 0.5,
                           time_sampling = "unif")
 
@@ -228,11 +228,11 @@ Plot_All_Persistence_Diagrams(data,
 
 
 
-## Example segment_to_segments
+## Example data3D_segment_to_segments
 
 
 ```{r}
-data <- segment_to_segments(n = 1000, 
+data <- data3D_segment_to_segments(n = 1000, 
                             change = 0.5, 
                             gap = 0.5)
 
@@ -245,11 +245,11 @@ Plot_All_Persistence_Diagrams(data,
 
 
 
-## Example circle_move_distortion
+## Example data3D_circle_move_distortion
 
 
 ```{r}
-data <- circle_move_distortion(n = 10000, 
+data <- data3D_circle_move_distortion(n = 10000, 
                                rotation = 2, 
                                X_rate = 5, 
                                Y_rate = 1, time_sampling = "discrete",

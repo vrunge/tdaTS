@@ -3,11 +3,11 @@ library(plotly)
 
 ################################################################################################
 ################
-#### data circle_move_distortion
+#### data data3D_circle_move_distortion
 ################
 
 nb_levels <- 20
-data <- circle_move_distortion(n = 10000, rotation = 4, X_rate = 0.5, Y_rate = 3)
+data <- data3D_circle_move_distortion(n = 10000, rotation = 4, X_rate = 0.5, Y_rate = 3)
 
 ######## plot the data
 
@@ -20,10 +20,10 @@ plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
 
 ################################################################################################
 ################
-#### data segment_to_segments
+#### data data3D_segment_to_segments
 ################
 
-data <- segment_to_segments(X_rate = 2, gap = 0.1)
+data <- data3D_segment_to_segments(X_rate = 2, gap = 0.1)
 
 
 minD <- min(data$x, data$y)
@@ -35,10 +35,10 @@ plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
 
 ################################################################################################
 ################
-#### data circle_extinction
+#### data data3D_circle_extinction
 ################
 
-data <- circle_extinction(change = 0.9)
+data <- data3D_circle_extinction(change = 0.9)
 
 minD <- min(data$x, data$y)
 maxD <- max(data$x, data$y)
@@ -50,14 +50,14 @@ plot_ly(resScale, x = resScale$x, y = resScale$y, z = resScale$t,
 
 ################################################################################################
 ################
-#### data segment_to_circle
+#### data data3D_segment_to_circle
 ################
 
 nb_levels <- 20
-data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
+data <- data3D_segment_to_circle(n = 1000, change = 0.5, time_sampling = "discrete", nb_levels = nb_levels)
 data$x <- data$x + rnorm(n= 1000, mean = 0, sd = 0.2)
 data$y <- data$y + rnorm(n = 1000, mean = 0, sd = 0.2)
-data <- segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
+data <- data3D_segment_to_circle(n = 1000, change = 0.5, time_sampling = "unif")
 
 ######## plot the data
 
