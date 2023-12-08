@@ -73,25 +73,6 @@ myplots <- function(data, complex = "alpha")
 
 
 
-```r
-pointSquareHole <- function(n, Hole_Relative_length = 0)
-{
-  len <- sqrt(Hole_Relative_length)
-  a <- (1-Hole_Relative_length)/2
-  b <- (1+Hole_Relative_length)/2
-  mat <- matrix(NA,nrow = 0, ncol = 2)
-  while(nrow(mat) < n)
-  {
-    u <- runif(2)
-    if(!(u[1] > a &  u[1] < b  & u[2] > a & u[2] < b)){mat <- rbind(mat, u)}
-    
-  }
-  res <- mat %>%
-    as_tibble(.name_repair = "minimal") %>%
-    setNames(c("x","y"))
-  return(res)
-}
-```
 
 
 
@@ -100,25 +81,25 @@ pointSquareHole <- function(n, Hole_Relative_length = 0)
 
 
 ```r
-data <- pointSquareHole(5000, 0.075)
+data <- data2D_pointSquareHole(5000, 0.075)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-2.png)<!-- -->
 
 ```r
-data <- pointSquareHole(5000, 0.15)
+data <- data2D_pointSquareHole(5000, 0.15)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-4.png)<!-- -->
 
 ```r
-data <- pointSquareHole(5000, 0.3)
+data <- data2D_pointSquareHole(5000, 0.3)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-6.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-3-6.png)<!-- -->
 
 **CONCLUSION 1: We need a distance between barcodes, which doesn't take into account the death time of the hole (the most persistent elements).**
 
@@ -128,32 +109,32 @@ pl <- myplots(data)
 
 
 ```r
-data <- pointSquareHole(50, 0.3)
+data <- data2D_pointSquareHole(50, 0.3)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-2.png)<!-- -->
 
 ```r
-data <- pointSquareHole(500, 0.3)
+data <- data2D_pointSquareHole(500, 0.3)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-4.png)<!-- -->
 
 ```r
-data <- pointSquareHole(5000, 0.3)
+data <- data2D_pointSquareHole(5000, 0.3)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-6.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-4-6.png)<!-- -->
 
 
 We need a **distance** between barcodes, which doesn't detect differences bertween the 3 barcodes.
 
 **CONCLUSION 2: less point = less information. The distance has to take the number of points into account**
 
-`pointSquareHole(50, 0.3)` contains a hole but we barely can see it.
+`data2D_pointSquareHole(50, 0.3)` contains a hole but we barely can see it.
 
 
 
@@ -161,25 +142,25 @@ We need a **distance** between barcodes, which doesn't detect differences bertwe
 
 
 ```r
-data <- pointSquareHole(100, 0)
+data <- data2D_pointSquareHole(100, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
 
 ```r
-data <- pointSquareHole(300, 0)
+data <- data2D_pointSquareHole(300, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-4.png)<!-- -->
 
 ```r
-data <- pointSquareHole(1000, 0)
+data <- data2D_pointSquareHole(1000, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-6.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-5-6.png)<!-- -->
 
 **CONCLUSION 3: we see a kind of limit distribution for H1 elements...**
 
@@ -188,50 +169,36 @@ pl <- myplots(data)
 
 
 
-```r
-pointCircleGap <- function(n, gap)
-{
-  gap <- 2 * pi * gap
-  t <- runif(n, min = 0, max = 2 * pi - gap)
-  x <- cos(t)
-  y <- sin(t)
-  res <- matrix(c(x,y), nrow = n, byrow = FALSE) %>%
-    as_tibble(.name_repair = "minimal") %>%
-    setNames(c("x","y"))
-  return(res)
-}
-```
-
 
 
 
 ```r
-data <- pointCircleGap(100, 0)
+data <- data2D_pointEllipseMissingArc(100, 0, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.05)
+data <- data2D_pointEllipseMissingArc(100, 0.05, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-4.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-6.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-6.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.3)
+data <- data2D_pointEllipseMissingArc(100, 0.3, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-7.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-8.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-7.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-6-8.png)<!-- -->
 
 
 The same with additional Gaussian noise.
@@ -240,40 +207,32 @@ The same with additional Gaussian noise.
 
 
 ```r
-data<- pointCircleGap(100, 0)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data<- data2D_pointEllipseMissingArc(100, 0)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.1)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-4.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.2)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.2)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-6.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-5.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-6.png)<!-- -->
 
 ```r
-data <- pointCircleGap(100, 0.3)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.3)
 pl <- myplots(data)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-7.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-8.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-7.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-7-8.png)<!-- -->
 
 If no gap, the H1 main element appears at the same time a the last fusion in H0 elements.
 
@@ -285,17 +244,17 @@ The bigger the gap, the bigger the delay in H1.
 
 
 ```r
-data <- pointSquareHole(100,0)
+data <- data2D_pointSquareHole(100,0)
 pl <- myplots(data, complex = "alpha")
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-10-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-10-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
 
 ```r
 pl <- myplots(data, complex = "rips")
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-10-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-10-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-8-4.png)<!-- -->
 
 
 # Comparing different noise 
@@ -304,11 +263,11 @@ Gaussian versus Uniform noise
 
 
 ```r
-data<- pointSquareHole(500, 0)
+data<- data2D_pointSquareHole(500, 0)
 pl <- myplots(data, complex = "alpha")
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-1.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
 
 ```r
 data<- data.frame(matrix(0, nrow = 500, ncol = 2))
@@ -318,13 +277,13 @@ data$y <- data$y + rnorm(n = 500, mean = 0, sd = 10)
 pl <- myplots(data, complex = "alpha")
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-4.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-3.png)<!-- -->![](Barcodes_noChange_files/figure-html/unnamed-chunk-9-4.png)<!-- -->
 
 Alpha diagrams (Rips doesn't work...)
 
 
 ```r
-data<- pointSquareHole(10000, 0)
+data<- data2D_pointSquareHole(10000, 0)
 diag1 <- myplots(data)
 ```
 
@@ -357,13 +316,13 @@ Gumbel distribution?
 hist(log(log(res1)) - mean(log(log(res1))), breaks = 200)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 hist(log(log(res2))- mean(log(log(res1))), breaks = 200)
 ```
 
-![](Barcodes_noChange_files/figure-html/unnamed-chunk-13-2.png)<!-- -->
+![](Barcodes_noChange_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
 
 
 Max values
@@ -373,7 +332,7 @@ max(res1)
 ```
 
 ```
-## [1] 9.439811
+## [1] 9.794888
 ```
 
 ```r
@@ -381,14 +340,14 @@ max(res2)
 ```
 
 ```
-## [1] 7.666121
+## [1] 8.606598
 ```
 
 The Square with a hole? 
 
 
 ```r
-data <- pointSquareHole(10000, 0.3)
+data <- data2D_pointSquareHole(10000, 0.3)
 diag3 <- myplots(data)
 ```
 
@@ -409,7 +368,7 @@ max(res3)
 ```
 
 ```
-## [1] 584.8804
+## [1] 646.2998
 ```
 
 
@@ -419,9 +378,7 @@ The circle closed + small noise
 
 
 ```r
-data <- pointCircleGap(10000, 0)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0, 0.01)
 diag3 <- myplots(data)
 ```
 
@@ -442,7 +399,7 @@ max(res3)
 ```
 
 ```
-## [1] 56973.07
+## [1] 28056.44
 ```
 
 
@@ -451,9 +408,7 @@ The circle not closed + small noise
 
 
 ```r
-data <- pointCircleGap(10000, 0.03)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0.03, 0.01)
 diag3 <- myplots(data)
 ```
 
@@ -474,7 +429,7 @@ max(res3)
 ```
 
 ```
-## [1] 154.1639
+## [1] 163.1695
 ```
 
 

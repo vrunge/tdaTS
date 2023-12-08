@@ -91,7 +91,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-2.png)<!-- -->
 
 ```
-## [1] 1.615747
+## [1] 1.65057
 ```
 
 ```r
@@ -102,7 +102,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-4.png)<!-- -->
 
 ```
-## [1] 1.800308
+## [1] 1.817264
 ```
 
 ```r
@@ -113,7 +113,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-3-6.png)<!-- -->
 
 ```
-## [1] 1.943965
+## [1] 1.979486
 ```
 
 
@@ -129,7 +129,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-2.png)<!-- -->
 
 ```
-## [1] 1.312419
+## [1] 1.19714
 ```
 
 ```r
@@ -140,7 +140,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-4.png)<!-- -->
 
 ```
-## [1] 1.689273
+## [1] 1.655248
 ```
 
 ```r
@@ -151,7 +151,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-4-6.png)<!-- -->
 
 ```
-## [1] 1.944635
+## [1] 1.935782
 ```
 
 
@@ -166,7 +166,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-2.png)<!-- -->
 
 ```
-## [1] 1.069817
+## [1] 1.07222
 ```
 
 ```r
@@ -177,7 +177,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-4.png)<!-- -->
 
 ```
-## [1] 1.424552
+## [1] 1.247017
 ```
 
 ```r
@@ -188,7 +188,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-5-6.png)<!-- -->
 
 ```
-## [1] 1.399019
+## [1] 1.457478
 ```
 
 
@@ -197,55 +197,47 @@ pl <- myplots(data); pl$maxValue
 
 
 ```r
-data<- data2D_pointCircleGap(100, 0)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data<- data2D_pointEllipseMissingArc(100, 0)
 pl <- myplots(data); pl$maxValue
 ```
 
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-2.png)<!-- -->
 
 ```
-## [1] 1.697045
+## [1] 2.137156
 ```
 
 ```r
-data <- data2D_pointCircleGap(100, 0.1)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.1)
 pl <- myplots(data); pl$maxValue
 ```
 
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-4.png)<!-- -->
 
 ```
-## [1] 1.715343
+## [1] 1.131344
 ```
 
 ```r
-data <- data2D_pointCircleGap(100, 0.2)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.2)
 pl <- myplots(data); pl$maxValue
 ```
 
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-5.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-6.png)<!-- -->
 
 ```
-## [1] 1.15075
+## [1] 1.227235
 ```
 
 ```r
-data <- data2D_pointCircleGap(100, 0.3)
-data$x <- data$x + rnorm(n= 100, mean = 0, sd = 0.1)
-data$y <- data$y + rnorm(n = 100, mean = 0, sd = 0.1)
+data <- data2D_pointEllipseMissingArc(100, 0.3)
 pl <- myplots(data); pl$maxValue
 ```
 
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-7.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-6-8.png)<!-- -->
 
 ```
-## [1] 0.77569
+## [1] 0.6183207
 ```
 
 # Comparing different noise 
@@ -261,7 +253,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
 
 ```
-## [1] 1.328638
+## [1] 1.296193
 ```
 
 ```r
@@ -275,7 +267,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/unnamed-chunk-7-4.png)<!-- -->
 
 ```
-## [1] 1.437495
+## [1] 1.328406
 ```
 
 Gaussian versus Uniform noise 10000 data points
@@ -289,7 +281,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law-2.png)<!-- -->
 
 ```
-## [1] 1.549178
+## [1] 1.499193
 ```
 
 ```r
@@ -303,7 +295,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law-3.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law-4.png)<!-- -->
 
 ```
-## [1] 1.413658
+## [1] 1.476651
 ```
 
 The Square with a hole? 
@@ -316,7 +308,7 @@ pl <- myplots(data); pl$maxValue
 ![](16_11_Gumbel_files/figure-html/ratio law 2-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law 2-2.png)<!-- -->
 
 ```
-## [1] 1.413658
+## [1] 1.476651
 ```
 
 
@@ -325,16 +317,14 @@ The circle closed + small noise
 
 
 ```r
-data <- data2D_pointCircleGap(10000, 0)
-data$x <- data$x + rnorm(n= 10000, mean = 0, sd = 0.01)
-data$y <- data$y + rnorm(n = 10000, mean = 0, sd = 0.01)
+data <- data2D_pointEllipseMissingArc(10000, 0)
 pl <- myplots(data); pl$maxValue
 ```
 
 ![](16_11_Gumbel_files/figure-html/ratio law 4-1.png)<!-- -->![](16_11_Gumbel_files/figure-html/ratio law 4-2.png)<!-- -->
 
 ```
-## [1] 2.299
+## [1] 2.132478
 ```
 
 
@@ -352,7 +342,7 @@ dim(diagALPHA)
 ```
 
 ```
-## [1] 59628     3
+## [1] 59471     3
 ```
 
 ```r
@@ -361,7 +351,7 @@ sum(sel)
 ```
 
 ```
-## [1] 29628
+## [1] 29471
 ```
 
 ```r
@@ -372,7 +362,7 @@ max(gumbel)
 ```
 
 ```
-## [1] 1.484492
+## [1] 1.539083
 ```
 
 ```r
@@ -419,7 +409,7 @@ sum(pvalue < 0.005) #how many time we "see" the hole
 ```
 
 ```
-## [1] 93
+## [1] 94
 ```
 
 
@@ -454,7 +444,7 @@ sum(pvalue < 0.005) #how many time we "see" the hole
 ```
 
 ```
-## [1] 2
+## [1] 5
 ```
 
 
@@ -469,9 +459,7 @@ index <- (floor(0:599/100)+1)
 for(i in 1:600)
 {
   j <- index[i]
-  data <- data2D_pointCircleGap(j*100, 0.1)
-  data$x <- data$x + rnorm(n= j*100, mean = 0, sd = 0.05)
-  data$y <- data$y + rnorm(n = j*100, mean = 0, sd = 0.05)
+  data <- data2D_pointEllipseMissingArc(j*100, 0.1, 0.05)
   #plot(data)
   diagALPHA <- calculate_homology(data, dim = 1)
   sel <- diagALPHA[,1] == 1
