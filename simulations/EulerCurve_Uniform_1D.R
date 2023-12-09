@@ -15,12 +15,6 @@ hist(dataUniform(L1 = 1, L2 =2, M = 1, a = 1, b = 1, N = 10000), breaks = 100)
 data <- dataUniform(L1 = 1, L2 =2, M = 1, a = 1, b = 1, N = 10000)
 
 
-EulerCurve_Uniform_1D <- function(data)
-{
-
-  return(res)
-}
-
 
 
 
@@ -34,8 +28,8 @@ euler <- function(r,N,N1,N2,L1,L2,M)
   res <- res - (N2-1)*(1-(1-pmin(2*r/L2,1))^N2)
 
     y <- (2*r - M)/(L1+L2)
-    r2 <- - (1-y)^(N1+N2+1)
-    r3 <- -(N1+N2+1) * y*(1-y)^(N1+N2)
+    r1 <- - (1-y)^(N1+N2+1)
+    r2 <- -(N1+N2+1) * y*(1-y)^(N1+N2)
     res <- res - (1+r1+r2)*((2*r >= M))
 
   return(res)
@@ -66,18 +60,18 @@ euler2 <- function(r,N,N1,N2,L1,L2,M)
 
 
 L1 <- 1
-L2 <- 2
-M <- 1
+L2 <- 1
+M <- 3
 
-data <- dataUniform(L1 = L1, L2 = L2, M = M, a = 2, b = 1, N = 100)
+data <- dataUniform(L1 = L1, L2 = L2, M = M, a = 1, b = 1, N = 100)
 
-
+plot(data)
 res <- sort(diff(sort(data)))
 r <- seq(0,1.2*max(res), length.out = 1000)  # for radius r
-y <- rep(length(data), length(x))
+y <- rep(length(data), length(r))
 
 for(i in 1:length(x)){y[i] <- y[i] - sum(res < 2*r[i])}
-plot(r,y, type = 'l', lwd = 2, col = 2)
+plot(r,(y), type = 'l', lwd = 2, col = 2)
 segments(min(r[y == 2]), 2, max(r[y == 2]), 2, col= 3, lwd = 2)
 par(new = TRUE)
 plot(r,euler(r,length(data),sum(data <=L1) ,sum(data > L1),L1,L2,M), type = 'l')
@@ -90,10 +84,10 @@ plot(r,euler(r,length(data),sum(data <=L1) ,sum(data > L1),L1,L2,M), type = 'l')
 
 
 L1 <- 2
-L2 <- 4
-M <- 0.5
+L2 <- 1
+M <- 1
 N <- 100
-a <- 4
+a <- 6
 b <- 2
 maxX <- M + min(c(L1,L2))
 
