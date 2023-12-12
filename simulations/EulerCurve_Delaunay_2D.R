@@ -1,7 +1,7 @@
 
 
 N <- 2000
-data <- data2D_pointTwoCirclesMerged(N,overlap = 0.025)
+data <- data2D_pointTwoCirclesMerged(N,overlap = 0.03)
 res <- tri.mesh(x = data)
 plot(res)
 
