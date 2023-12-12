@@ -4,6 +4,7 @@ importFrom("stats", "runif")
 importFrom("stats", "rnorm")
 importFrom("stats", "setNames")
  importFrom("stats", "rbinom")
+ importFrom("stats", "integrate")
 
 importFrom("graphics", "lines", "mtext", "par", "segments")
 
@@ -15,4 +16,4 @@ importFrom(dplyr,"select")
 importFrom(tibble,"as_tibble")
 importFrom(TDA,"alphaComplexDiag")
 
-
+importFrom("zipfR", "Ibeta")
