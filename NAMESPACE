@@ -17,3 +17,4 @@ importFrom(tibble,"as_tibble")
 importFrom(TDA,"alphaComplexDiag")
 
 importFrom("zipfR", "Ibeta")
+importFrom("interp", "tri.mesh")

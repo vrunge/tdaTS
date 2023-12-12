@@ -15,7 +15,8 @@ Imports:
     magrittr,
     TDA,
     tibble,
-    zipfR
+    zipfR,
+    interp
 Suggests: 
     devtools, 
     ggplot2,
