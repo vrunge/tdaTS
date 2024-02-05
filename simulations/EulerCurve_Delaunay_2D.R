@@ -43,7 +43,7 @@ plot(log(r), 100*(yNEW == -1)-101, col= 2, lwd = 2, type = 'l', ylim = yylim) #r
 
 
 N <- 2000
-data <- data2D_pointSquareHole(N, Hole_Relative_length = 0.09)
+data <- data2D_pointSquareHole(N, Hole_Relative_length = 0.1)
 res <- tri.mesh(x = data)
 plot(res)
 
@@ -109,7 +109,7 @@ plot(mat, asp = 1)
 hist(radii2, breaks = 100,xlim = c(0,Br))
 par(new = TRUE)
 r <- seq(0,min(200/N,1), length.out = 1000)
-res <- (1-r)*(r)^3*(1-(r)^2)^(N-3)
+res <- (1-r)*(r)^3 * (1-(r)^2)^(N-3)
 plot(r,res, type = 'l',xlim = c(0,Br)) # small N effet de bord
 
 
